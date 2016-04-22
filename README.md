@@ -1,5 +1,8 @@
 gtime
-=====
+=====    
+
+[![GoDoc](https://godoc.org/github.com/jochasinga/gtime?status.svg)](https://godoc.org/github.com/jochasinga/gtime) [![Build Status](https://travis-ci.org/jochasinga/gtime.svg?branch=master)](https://travis-ci.org/jochasinga/gtime)  [![Coverage Status](https://coveralls.io/repos/github/jochasinga/gtime/badge.svg?branch=master)](https://coveralls.io/github/jochasinga/gtime?branch=master)
+
 Deal with Go time stress-free.
 
 Description
@@ -18,11 +21,11 @@ instead of
 ```go
 
 // How much is 0.5 second?
-var s = time.Duration(500) * time.Millisecond
+s := time.Duration(500) * time.Millisecond
 
 ```
 
-*gtime* is the tool set for doing just that.
+Then try *gtime* tool set.
 
 Install
 -------
@@ -46,12 +49,11 @@ import "github.com/jochasinga/gtime"
 func main() {
         h := gtime.Hour(24)
         fmt.Printf("%.f hours >> %.f hours\n", h, h.Hours())
-	fmt.Printf("%.f hours >> %.f minutes\n", h.Minutes())
-	fmt.Printf("%.f hours >> %d nanoseconds\n", h.Nanoseconds())
-	fmt.Printf("%.f hours >> %.f seconds\n", h.Seconds())
-	fmt.Printf("%.f hours >> %q as string\n", h.String())
-	fmt.Printf("%.f hours >> %v as time.Duration\n", h.Duration())
-
+        fmt.Printf("%.f hours >> %.f minutes\n", h.Minutes())
+        fmt.Printf("%.f hours >> %d nanoseconds\n", h.Nanoseconds())
+        fmt.Printf("%.f hours >> %.f seconds\n", h.Seconds())
+        fmt.Printf("%.f hours >> %q as string\n", h.String())
+        fmt.Printf("%.f hours >> %v as time.Duration\n", h.Duration())
 }
 
 ```
@@ -69,7 +71,7 @@ The above prints:
 
 ```
 
-Want to find out how much 30 minutes is?
+How much 30 minutes is?
 
 ```go
 
@@ -79,7 +81,7 @@ fmt.Println(m.Seconds()) // 1800.000000
 
 ```
 
-Or `Second`:
+Or 0.3 second?
 
 ```go
 
@@ -89,11 +91,20 @@ fmt.Println(s.String())      // "300ms"
 
 ```
 
+Convert from `gtime` types to `time.Duration` with `Duration()`
+
+```go
+
+s := gtime.Second(6.5)
+c := &http.Client{Timeout: s.Duration()}
+
+
+```
+
 gtime.Duration
 --------------
 
-Both `gtime` types and `time.Duration` implement `Duration`,
-therefore they can be used hand in hand.
+Both `gtime` types and `time.Duration` implement `gtime.Duration`, likewise:
 
 ```go
 
@@ -112,7 +123,7 @@ sum := add(s1, s2)  // 1.500000
 Helper functions
 ----------------
 
-### Ftos(t float64) time.Duration
+### Ftos
 Converts a floating point number to a duration in second.
 
 ```go
@@ -121,7 +132,7 @@ s := gtime.Ftos(0.5)
 
 ```
 
-### Stof(s time.Duration) float64
+### Stof
 Converts a duration in second to floating point number.
 
 ```go
